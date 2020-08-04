@@ -40,24 +40,6 @@ envvars:
     tags:
       - aws
 
-  - name: MASTER_ACCOUNT_ID
-    desc: Guardduty master account id
-    optional: true
-    tags:
-      - terraform
-
-  - name: MEMBER_ACCOUNT_ID
-    desc: Guardduty member account id for invite
-    optional: true
-    tags:
-      - terraform
-
-  - name: MEMBER_EMAIL_ID
-    desc: Guardduty member email id for invite
-    optional: true
-    tags:
-      - terraform
-
   - name: TERRAFORM_WORKSPACE
     desc: Terraform Workspace that will be deployed to
     tags:
