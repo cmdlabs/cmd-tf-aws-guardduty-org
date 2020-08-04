@@ -21,15 +21,15 @@ init: .env
 PHONY: init
 
 plan: .env  $(PROFILE_REQUIRED) init workspace
-	docker-compose run --rm terraform-utils sh -c 'TF_VAR_master_account_id=$(MASTER_ACCOUNT_ID) TF_VAR_member_account_id=$(MEMBER_ACCOUNT_ID) TF_VAR_member_email_id=$(MEMBER_EMAIL_ID) terraform plan'
+	docker-compose run --rm terraform-utils sh -c 'terraform plan'
 PHONY: plan
 
 apply: .env  $(PROFILE_REQUIRED) init workspace
-	docker-compose run --rm terraform-utils sh -c 'TF_VAR_master_account_id=$(MASTER_ACCOUNT_ID) TF_VAR_member_account_id=$(MEMBER_ACCOUNT_ID) TF_VAR_member_email_id=$(MEMBER_EMAIL_ID) terraform apply -auto-approve'
+	docker-compose run --rm terraform-utils sh -c 'terraform apply -auto-approve'
 PHONY: apply
 
 destroy: .env  $(PROFILE_REQUIRED) init workspace
-	docker-compose run --rm terraform-utils sh -c 'TF_VAR_master_account_id=$(MASTER_ACCOUNT_ID) TF_VAR_member_account_id=$(MEMBER_ACCOUNT_ID) TF_VAR_member_email_id=$(MEMBER_EMAIL_ID) terraform destroy -auto-approve'
+	docker-compose run --rm terraform-utils sh -c 'terraform destroy -auto-approve'
 PHONY: destroy
 
 tag:
