@@ -63,4 +63,4 @@ The below outlines the current parameters and defaults.
 
 ## License
 
-Apache 2.0.
+Apache 2.0
