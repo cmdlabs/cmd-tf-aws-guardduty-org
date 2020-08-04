@@ -20,6 +20,7 @@ plan-master:
   stage: plan-master
   variables:
     TERRAFORM_WORKSPACE: master
+    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make plan
@@ -30,6 +31,7 @@ apply-master:
   stage: apply-master
   variables:
     TERRAFORM_WORKSPACE: master
+    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make apply
@@ -40,6 +42,7 @@ destroy-master:
   stage: destroy-master
   variables:
     TERRAFORM_WORKSPACE: master
+    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make destroy
