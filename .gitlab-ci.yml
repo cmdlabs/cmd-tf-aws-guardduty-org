@@ -2,15 +2,11 @@ stages:
   - format
   - plan-master
   - apply-master
-  - plan-member
-  - apply-member
-  - destroy-member
   - destroy-master
   - publish
 
 variables:
   AWS_DEFAULT_REGION: ap-southeast-2
-  SUBFOLDER: tests
   AWS_ROLE_NAME: gitlab_runner
 
 format:
@@ -24,7 +20,6 @@ plan-master:
   stage: plan-master
   variables:
     TERRAFORM_WORKSPACE: master
-    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make plan
@@ -35,43 +30,9 @@ apply-master:
   stage: apply-master
   variables:
     TERRAFORM_WORKSPACE: master
-    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make apply
-  tags:
-    - cmd
-
-plan-sandpit:
-  stage: plan-member
-  variables:
-    TERRAFORM_WORKSPACE: sandpit
-    AWS_ACCOUNT_ID: $MEMBER_ACCOUNT_ID
-    AWS_PROFILE_NAME: cmdlabtf-sandpit
-  script:
-    - make plan
-  tags:
-    - cmd
-
-apply-sandpit:
-  stage: apply-member
-  variables:
-    TERRAFORM_WORKSPACE: sandpit
-    AWS_ACCOUNT_ID: $MEMBER_ACCOUNT_ID
-    AWS_PROFILE_NAME: cmdlabtf-sandpit
-  script:
-    - make apply
-  tags:
-    - cmd
-
-destroy-sandpit:
-  stage: destroy-member
-  variables:
-    TERRAFORM_WORKSPACE: sandpit
-    AWS_ACCOUNT_ID: $MEMBER_ACCOUNT_ID
-    AWS_PROFILE_NAME: cmdlabtf-sandpit
-  script:
-    - make destroy
   tags:
     - cmd
 
@@ -79,7 +40,6 @@ destroy-master:
   stage: destroy-master
   variables:
     TERRAFORM_WORKSPACE: master
-    AWS_ACCOUNT_ID: $MASTER_ACCOUNT_ID
     AWS_PROFILE_NAME: cmdlabtf-master
   script:
     - make destroy
