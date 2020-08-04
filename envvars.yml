@@ -40,22 +40,6 @@ envvars:
     tags:
       - aws
 
-  - name: MASTER_ACCOUNT_ID
-    desc: Guardduty master account id
-    optional: true
-    tags:
-      - terraform
-
-  - name: TERRAFORM_WORKSPACE
-    desc: Terraform Workspace that will be deployed to
-    tags:
-      - terraform
-
-  - name: SUBFOLDER
-    desc: SUBFOLDER for Terraform work directory
-    tags:
-      - terraform
-
   - name: CI_PROJECT_NAME
     desc: Gitlab project name
     tags:
