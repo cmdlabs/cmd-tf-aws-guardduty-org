@@ -12,7 +12,7 @@ resource "aws_guardduty_organization_configuration" "org" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  count         = var.bucket_enable ? 1 : 0
+  count         = var.bucket_name == "" ? 0 : 1
   bucket        = var.bucket_name
   versioning {
     enabled = true
@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_object" "ipset" {
-  count     = var.bucket_enable && var.ipset_enable ? 1 : 0
+  count     = var.bucket_name == "" || var.ipset_iplist == [] ? 0 : 1
   acl       = "public-read"
   content   = templatefile("${path.module}/templates/ipset.txt.tpl",
   { ipset_iplist = var.ipset_iplist })
@@ -31,7 +31,7 @@ resource "aws_s3_bucket_object" "ipset" {
 }
 
 resource "aws_guardduty_ipset" "ipset" {
-  count       = var.bucket_enable && var.ipset_enable ? 1 : 0
+  count       = var.bucket_name == "" || var.ipset_iplist == [] ? 0 : 1
   activate    = true
   detector_id = aws_guardduty_detector.detector.id
   format      = var.ipset_format
@@ -40,7 +40,7 @@ resource "aws_guardduty_ipset" "ipset" {
 }
 
 resource "aws_s3_bucket_object" "threatintelset" {
-  count       = var.bucket_enable && var.threatintelset_enable ? 1 : 0
+  count       = var.bucket_name == "" || var.threatintelset_iplist == [] ? 0 : 1
   acl         = "public-read"
   content     = templatefile("${path.module}/templates/threatintelset.txt.tpl",
   { threatintelset_iplist = var.threatintelset_iplist })
@@ -49,7 +49,7 @@ resource "aws_s3_bucket_object" "threatintelset" {
 }
 
 resource "aws_guardduty_threatintelset" "threatintelset" {
-  count       = var.bucket_enable && var.threatintelset_enable ? 1 : 0
+  count       = var.bucket_name == "" || var.threatintelset_iplist == [] ? 0 : 1
   activate    = true
   detector_id = aws_guardduty_detector.detector.id
   format      = var.threatintelset_format
