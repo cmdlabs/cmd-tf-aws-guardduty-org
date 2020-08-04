@@ -17,7 +17,9 @@
 
 Amazon GuardDuty is a continuous security monitoring service that analyses and processes the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses threat intelligence feeds, such as lists of malicious IPs and domains, and machine learning to identify unexpected and potentially unauthorised and malicious activity within your AWS environment.
 
-This repo contains Terraform modules for configuring AWS GuardDuty via AWS Organisations and managing IPSets and ThreadSets used by GuardDuty.
+This repo contains Terraform modules for configuring AWS GuardDuty via AWS Organisations and optionally managing IPSets and ThreadSets used by GuardDuty.
+
+This module only needs to be run once. All existing AWS Organisation member accounts and all future AWS Organisation member accounts will be added automatically.
 
 Terraform >= 0.12.20 is required for this module.
 
@@ -44,11 +46,14 @@ The below outlines the current parameters and defaults.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
+|bucket_enable|Enable the use of S3 buckets for Guardduty|bool|true|No
 |bucket_name|Name of the S3 bucket to use|string|""|Yes|
 |force_destroy|(Optional) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable.|bool|false|No|
 |detector_enable|Enable monitoring and feedback reporting|bool|true|No|
+|ipset_enable|Enable the use of IPSet|bool|true|No
 |ipset_format|The format of the file that contains the IPSet|string|TXT|No|
 |ipset_iplist|IPSet list of trusted IP addresses|list|[]|No|
+|threatintelset_enable|Enable the use of ThreatIntelSet|bool|true|No
 |threatintelset_format|The format of the file that contains the ThreatIntelSet|string|TXT|No|
 |threatintelset_iplist|ThreatIntelSet list of known malicious IP addresses|list|[]|No|
 
