@@ -54,12 +54,6 @@ profile: .env
 	docker-compose run --rm aws aws configure set credential_source Ec2InstanceMetadata --profile cmdlabtf-tfbackend
 	docker-compose run --rm aws aws configure set role_arn arn:aws:iam::471871437096:role/gitlab_runner --profile cmdlabtf-tfbackend
 
-workspace: .env
-	docker-compose run --rm envvars ensure --tags terraform
-	docker-compose run --rm terraform-utils sh -c 'terraform workspace new $(TERRAFORM_WORKSPACE); true'
-	docker-compose run --rm terraform-utils sh -c 'terraform workspace select $(TERRAFORM_WORKSPACE)'
-.PHONY: workspace
-
 .env:
 	touch .env
 	docker-compose run --rm envvars validate
