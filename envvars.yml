@@ -75,7 +75,5 @@ tags:
     desc: AWS authentication envvars
   - name: profile
     desc: 'Configure ~/.aws/config with a profile'
-  - name: terraform
-    desc: Required to run Terraform commands
   - name: publish
     desc: Github publishing envvars
