@@ -4,7 +4,7 @@ resource "aws_guardduty_organization_admin_account" "admin" {
 
 resource "aws_guardduty_detector" "detector" {
   depends_on = [aws_guardduty_organization_admin_account.admin]
-  enable = var.detector_enable
+  enable     = var.detector_enable
 }
 
 resource "aws_guardduty_organization_configuration" "org" {
