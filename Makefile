@@ -5,7 +5,7 @@ ifdef CI
 endif
 
 docs: .env
-	ruby erb/docs.rb
+	docker-compose run --rm terraform-utils terraform-docs markdown document . > README.md
 PHONY: docs
 
 format: .env
@@ -16,7 +16,7 @@ formatCheck: .env
 	docker-compose run --rm terraform-utils terraform fmt -recursive -check -diff .
 PHONY: formatCheck
 
-init: .env
+init: .env $(PROFILE_REQUIRED)
 	docker-compose run --rm terraform-utils sh -c 'terraform init tests'
 PHONY: init
 
@@ -52,7 +52,7 @@ profile: .env
 	docker-compose run --rm aws sh -c 'aws configure set credential_source Ec2InstanceMetadata --profile $${AWS_PROFILE_NAME}'
 	docker-compose run --rm aws sh -c 'aws configure set role_arn arn:aws:iam::$${AWS_ACCOUNT_ID}:role/$${AWS_ROLE_NAME} --profile $${AWS_PROFILE_NAME}'
 	docker-compose run --rm aws aws configure set credential_source Ec2InstanceMetadata --profile cmdlabtf-tfbackend
-	docker-compose run --rm aws aws configure set role_arn arn:aws:iam::471871437096:role/gitlab_runner --profile cmdlabtf-tfbackend
+	docker-compose run --rm aws aws configure set role_arn arn:aws:iam::$(AWS_ACCOUNT_ID_MASTER):role/gitlab_runner --profile cmdlabtf-tfbackend
 
 .env:
 	touch .env
