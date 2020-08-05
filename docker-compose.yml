@@ -20,7 +20,7 @@ services:
       - .:/work
 
   aws:
-    image: cmdlabs/aws-utils:1.16.96
+    image: cmdlabs/aws-utils:1.0.2
     env_file: .env
     entrypoint: []
     volumes:
