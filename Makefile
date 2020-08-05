@@ -17,19 +17,19 @@ formatCheck: .env
 PHONY: formatCheck
 
 init: .env $(PROFILE_REQUIRED)
-	docker-compose run --rm terraform-utils sh -c 'terraform init tests'
+	docker-compose run --rm terraform-utils terraform init tests
 PHONY: init
 
 plan: .env  $(PROFILE_REQUIRED) init
-	docker-compose run --rm terraform-utils sh -c 'terraform plan tests'
+	docker-compose run --rm terraform-utils terraform plan tests
 PHONY: plan
 
 apply: .env  $(PROFILE_REQUIRED) init
-	docker-compose run --rm terraform-utils sh -c 'terraform apply -auto-approve tests'
+	docker-compose run --rm terraform-utils terraform apply -auto-approve tests
 PHONY: apply
 
 destroy: .env  $(PROFILE_REQUIRED) init
-	docker-compose run --rm terraform-utils sh -c 'terraform destroy -auto-approve tests'
+	docker-compose run --rm terraform-utils terraform destroy -auto-approve tests
 PHONY: destroy
 
 tag:
