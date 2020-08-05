@@ -8,7 +8,7 @@ stages:
 variables:
   AWS_ROLE_NAME: gitlab_runner
   AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
-  AWS_PROFILE_NAME: cmdlabtf-sandpit
+  AWS_PROFILE_NAME: cmdlabtf-master
 
 
 format:
