@@ -3,7 +3,6 @@ resource "aws_guardduty_organization_admin_account" "admin" {
 }
 
 resource "aws_guardduty_detector" "detector" {
-  depends_on = [aws_guardduty_organization_admin_account.admin]
   enable     = var.detector_enable
 }
 
@@ -59,6 +58,7 @@ resource "aws_guardduty_threatintelset" "threatintelset" {
 }
 
 resource "aws_guardduty_member" "members" {
+  depends_on  = [aws_guardduty_organization_admin_account.admin]
   count       = length(data.aws_organizations_organization.org.non_master_accounts)
   account_id  = data.aws_organizations_organization.org.non_master_accounts[count.index]["id"]
   detector_id = aws_guardduty_detector.detector.id
