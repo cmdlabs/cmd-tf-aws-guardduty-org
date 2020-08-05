@@ -6,9 +6,10 @@ stages:
   - publish
 
 variables:
-  AWS_DEFAULT_REGION: ap-southeast-2
   AWS_ROLE_NAME: gitlab_runner
-  AWS_PROFILE_NAME: cmdlabtf-master
+  AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+  AWS_PROFILE_NAME: cmdlabtf-sandpit
+
 
 format:
   stage: format
